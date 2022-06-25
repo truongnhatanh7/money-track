@@ -10,9 +10,10 @@ import RealmSwift
 
 struct History: View {
     let realm = try! Realm();
+    @ObservedResults(Record.self) var results;
     
     var records: Array<Record> {
-        return Array(realm.objects(Record.self))
+        return Array(results)
     }
     
     var body: some View {

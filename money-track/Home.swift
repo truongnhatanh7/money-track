@@ -66,7 +66,7 @@ struct Home: View {
                     
             }
         }   .padding()
-            .background(Color.init(UIColor(rgb: 0xd4d29b)))
+            .background(Color.init(UIColor(rgb: 0xe3d8c3)))
             .onTapGesture {
                 isFocus = false
             }

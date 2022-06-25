@@ -71,6 +71,7 @@
 				55408F8C286715140070F4BC /* Assets.xcassets */,
 				55408F8E286715140070F4BC /* Preview Content */,
 				55408F96286715870070F4BC /* Home.swift */,
+				55408F9E286744B50070F4BC /* Model */,
 				55408F9C286732D30070F4BC /* Record.swift */,
 				55408F9A286723DA0070F4BC /* History.swift */,
 				55408F9828671A770070F4BC /* Helper.swift */,
@@ -84,6 +85,13 @@
 				55408F8F286715140070F4BC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		55408F9E286744B50070F4BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		761E9E74E448DAB0BC61CE6F /* Frameworks */ = {
