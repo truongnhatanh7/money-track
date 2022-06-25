@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct Home: View {
     @State var addBalance: String = "";
@@ -14,6 +15,7 @@ struct Home: View {
     @State var expense: String = "0.00";
     @FocusState var isFocus: Bool;
     var body: some View {
+        
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("Balance")
@@ -71,17 +73,45 @@ struct Home: View {
             
     }
     
+    
+    // TODO: Write regex to handle user's input
+    
     func handleAddBalance() {
-        balance = String(Double(balance)! + Double(addBalance)!)
-        addBalance = ""
-        isFocus = false;
+        
+        if (addBalance != "") {
+            balance = String(Double(balance)! + Double(addBalance)!)
+            
+            isFocus = false;
+            let realm = try! Realm()
+            let data = Record()
+//            print(realm.configuration.fileURL!)
+            data.amount = Double(addBalance)!;
+            data.type = "add";
+            try! realm.write({
+                realm.add(data)
+            })
+            addBalance = ""
+        }
+
+
     }
     
     func handleAddExp() {
-        balance = String(Double(balance)! - Double(expAmount)!)
-        expense = String(Double(expense)! + Double(expAmount)!)
-        expAmount = ""
-        isFocus = false
+        if (expAmount != "") {
+            balance = String(Double(balance)! - Double(expAmount)!)
+            expense = String(Double(expense)! + Double(expAmount)!)
+            
+            isFocus = false
+            let realm = try! Realm()
+            let data = Record()
+            data.amount = Double(expAmount)!;
+            data.type = "use";
+            try! realm.write({
+                realm.add(data)
+            })
+            expAmount = ""
+        }
+
     }
 }
 

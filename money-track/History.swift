@@ -6,10 +6,35 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct History: View {
+    let realm = try! Realm();
+    
+    var records: Array<Record> {
+        return Array(realm.objects(Record.self))
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List {
+                ForEach(records, id: \.self) { record in
+                    HistoryRow(record: record)
+                }
+            }
+            
+        }
+    }
+}
+
+struct HistoryRow: View {
+    var record: Record?
+    
+    var body: some View {
+        HStack {
+            Text(record!.type == "add" ? "You added " + String(record!.amount) + "$" : "You spent " + String(record!.amount) + "$")
+            
+        }
     }
 }
 
