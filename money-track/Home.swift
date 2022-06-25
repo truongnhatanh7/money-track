@@ -12,6 +12,7 @@ struct Home: View {
     @State var expAmount: String = "";
     @State var balance: String = "200.00";
     @State var expense: String = "0.00";
+    @FocusState var isFocus: Bool;
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
@@ -37,6 +38,7 @@ struct Home: View {
                         .font(.title2)
                     TextField("Amount",text: $addBalance)
                         .padding(.vertical)
+                        .focused($isFocus)
                     Button("Add more money", action: handleAddBalance)
                         .padding([.top, .bottom], 12)
                         .padding([.leading, .trailing], 32)
@@ -49,6 +51,7 @@ struct Home: View {
                         .font(.title2)
                     TextField("Amount", text: $expAmount)
                         .padding(.vertical)
+                        .focused($isFocus)
                     Button("Add expense", action: handleAddExp)
                         .padding([.top, .bottom], 12)
                         .padding([.leading, .trailing], 32)
@@ -62,18 +65,23 @@ struct Home: View {
             }
         }   .padding()
             .background(Color.init(UIColor(rgb: 0xd4d29b)))
+            .onTapGesture {
+                isFocus = false
+            }
             
     }
     
     func handleAddBalance() {
         balance = String(Double(balance)! + Double(addBalance)!)
         addBalance = ""
+        isFocus = false;
     }
     
     func handleAddExp() {
         balance = String(Double(balance)! - Double(expAmount)!)
         expense = String(Double(expense)! + Double(expAmount)!)
         expAmount = ""
+        isFocus = false
     }
 }
 
